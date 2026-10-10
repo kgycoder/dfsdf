@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,8 +63,9 @@ private fun Modifier.dialogGlass(backdrop: Backdrop, radius: Int, popIn: Float, 
         onDrawSurface = { drawRect(GlassTheme.Container) }
     )
 
-private val NoTouchThrough: Modifier = Modifier.pointerInput(Unit) { /* consume taps on the glass body */
-    androidx.compose.foundation.gestures.detectTapGestures { }
+private val NoTouchThrough: Modifier = Modifier.pointerInput(Unit) {
+    // consume taps on the glass body so they don't reach the DOM overlay behind
+    detectTapGestures { }
 }
 
 @Composable
